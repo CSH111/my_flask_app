@@ -12,3 +12,8 @@ def index():
 @app.route("/api/getFile")
 def xx():
     return "zxzxzxzx"
+
+
+@app.route("/my")
+def xx():
+    return "mymymymy"
