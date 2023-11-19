@@ -99,7 +99,7 @@ def xx2():
                     continue
                 if (rowIdx > 3):
                     continue
-                if (len(compName)) < 1:
+                if (len(compName) < 1):
                     continue
                 if (rowIdx == 1):
                     dfSrc["경력사항1"][fileIdx] = compName
