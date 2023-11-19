@@ -39,7 +39,11 @@ def xx2():
         "전공": [],
         '졸업연월': [],
         "경력사항1": [],
-        "최종직위": []
+        "최종직위": [],
+        "경력사항2": [],
+        '직위2': [],
+        "경력사항3": [],
+        '직위3': [],
     }
     if (request.method == "POST"):
         print('post come')
@@ -82,18 +86,33 @@ def xx2():
             dfSrc["전공"][fileIdx] = tableTwoTargetRow[2]
 
             tableThree = doc.tables[2]
+
             tableTreeTargetIdx = 0
 
             for rowIdx, row in enumerate(tableThree.rows):
+
                 text = (cell.text for cell in row.cells)
                 listText = list(text)
-                if (listText[1].strip() != ""):
-                    tableTreeTargetIdx = rowIdx
-
-            tableThreeTargetRow = list(cell.text for cell in (
-                list(tableThree.rows))[tableTreeTargetIdx].cells)
-            dfSrc["경력사항1"][fileIdx] = tableThreeTargetRow[1]
-            dfSrc["최종직위"][fileIdx] = tableThreeTargetRow[3]
+                compName = listText[1]
+                level = listText[3]
+                if (rowIdx == 0):
+                    continue
+                if (rowIdx > 3):
+                    continue
+                if (len(compName)) < 1:
+                    continue
+                if (rowIdx == 1):
+                    dfSrc["경력사항1"][fileIdx] = compName
+                    dfSrc["최종직위"][fileIdx] = level
+                    continue
+                if (rowIdx == 2):
+                    dfSrc["경력사항2"][fileIdx] = compName
+                    dfSrc["직위2"][fileIdx] = level
+                    continue
+                if (rowIdx == 3):
+                    dfSrc["경력사항3"][fileIdx] = compName
+                    dfSrc["직위3"][fileIdx] = level
+                    continue
 
         df1 = pd.DataFrame(dfSrc)
 
